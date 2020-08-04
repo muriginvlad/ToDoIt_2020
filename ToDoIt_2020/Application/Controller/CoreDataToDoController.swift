@@ -10,21 +10,25 @@ import UIKit
 import CoreData
 
 
+
 class CoreDataToDoController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    var tasks: [TasksDate] = []
+    var tasks = CoreDataToDo().tasks
     
     override func viewWillAppear(_ animated: Bool) {
+      
         super.viewWillAppear(animated)
+        
+  //      CoreDataToDo().getTask() - Почему-то не срабатывает тут
         
         let appDeligate = UIApplication.shared.delegate as! AppDelegate
         let context = appDeligate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<TasksDate> = TasksDate.fetchRequest()
-        
         do {tasks = try context.fetch(fetchRequest)}
         catch let error as NSError {print(error.localizedDescription)}
+        
     }
     
     override func viewDidLoad() {
@@ -38,7 +42,7 @@ class CoreDataToDoController: UIViewController {
         let saveAction = UIAlertAction(title: "Добавить", style: .default) { action in
             let tf = alertController.textFields?.first
             if let newTaskTitle = tf?.text {
-                self.saveTask(withTitle: newTaskTitle)
+                CoreDataToDo().saveTask(withTitle: newTaskTitle)
                 self.tableView.reloadData()
             }
         }
@@ -50,24 +54,10 @@ class CoreDataToDoController: UIViewController {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+        
     }
     
     
-    func saveTask(withTitle title: String) {
-        let appDeligate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDeligate.persistentContainer.viewContext
-        
-        guard let entity = NSEntityDescription.entity(forEntityName: "TasksDate", in: context) else { return }
-        let taskObject = TasksDate(entity: entity, insertInto: context)
-        taskObject.task = title
-        
-        do {
-            try context.save()
-            tasks.append(taskObject)
-        }
-        catch let error as NSError { print(error.localizedDescription)
-        }
-    }
 }
 
 extension CoreDataToDoController: UITableViewDataSource, UITableViewDelegate {
@@ -80,37 +70,56 @@ extension CoreDataToDoController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ToDoTableViewCell
         let task = tasks[indexPath.row]
         cell.taskLabel.text = task.task
-        cell.accessoryType = .none
+        
+        if task.isComplited == true {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
         return cell
     }
     
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        tasks.remove(at: indexPath.row)
-    //        self.tableView.reloadData()
-    //    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let test = tasks[indexPath.row]
+        CoreDataToDo().updateCheck(task: test)
+        
+        self.tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editingRow = tasks[indexPath.row]
         
         let deleteAction = UITableViewRowAction(style: .default, title: "Удалить"){ _,_  in
             
-            let appDeligate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDeligate.persistentContainer.viewContext
-            let fetchRequest: NSFetchRequest<TasksDate> = TasksDate.fetchRequest()
+            CoreDataToDo().deleteTask(taskIndex:indexPath.row)
             
-            if let tasks = try? context.fetch(fetchRequest) {
-                context.delete(tasks[indexPath.row])
-            }
-
-            do {
-                try context.save()
-            }
-            catch let error as NSError { print(error.localizedDescription)
-            }
             self.tableView.reloadData()
             
         }
-        return [deleteAction]
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Изменить"){ _,_  in
+            let alertController = UIAlertController(title: "Изменить задачу", message: "", preferredStyle: .alert)
+            let saveAction = UIAlertAction(title: "Изменить", style: .default) { action in
+                let tf = alertController.textFields?.first
+                if let newTaskTitle = tf?.text {
+
+                    self.tasks[indexPath.row].task = newTaskTitle
+                    self.tableView.reloadData()
+                }
+            }
+            alertController.addTextField { _ in }
+            let cancelAction = UIAlertAction(title: "Отменить", style: .default) { _ in }
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+            self.tableView.reloadData()
+        }
+        editAction.backgroundColor = .blue
+        
+        let action = [deleteAction,editAction]
+        return action
+        
     }
     
     
