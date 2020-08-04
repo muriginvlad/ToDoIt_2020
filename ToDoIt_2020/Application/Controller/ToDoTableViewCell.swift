@@ -9,7 +9,5 @@
 import UIKit
 
 class ToDoTableViewCell: UITableViewCell {
-
     @IBOutlet var taskLabel: UILabel!
-    
 }

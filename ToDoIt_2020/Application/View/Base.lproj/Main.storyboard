@@ -96,7 +96,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkg-a2-NJp">
                                 <rect key="frame" x="100" y="343" width="214" height="30"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Схоранить">
+                                <state key="normal" title="Сохранить">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -147,14 +147,14 @@
                                 <color key="sectionIndexBackgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="EFd-xO-cG8" customClass="ToDoTableViewCell" customModule="ToDoIt" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="47"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="47.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EFd-xO-cG8" id="hpi-N5-aTi">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="47"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="47.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-HO-sIi">
-                                                    <rect key="frame" x="30" y="13" width="332" height="21"/>
+                                                    <rect key="frame" x="30" y="12.999999999999998" width="332" height="21.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -235,14 +235,14 @@
                                 <color key="sectionIndexBackgroundColor" red="0.098741695749999997" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Cell" id="baY-mQ-mYS" customClass="ToDoTableViewCell" customModule="ToDoIt" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="47.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="46.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="baY-mQ-mYS" id="Pn9-cy-Bzw">
-                                            <rect key="frame" x="0.0" y="0.0" width="370" height="47.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="46.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mbm-oy-Gdb">
-                                                    <rect key="frame" x="30" y="13.000000000000002" width="332" height="21.666666666666671"/>
+                                                    <rect key="frame" x="30" y="13.000000000000002" width="332" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
