@@ -31,24 +31,24 @@ class CoreDataToDo {
         
         do {
             try context.save()
-            self.tasks.append(taskObject)
+            tasks.append(taskObject)
         }
         catch let error as NSError { print(error.localizedDescription)
         }
     }
     
-    func getTask()  {
+    func getTask() -> [TasksDate] {
         
         let context = getContext()
         let fetchRequest: NSFetchRequest<TasksDate> = TasksDate.fetchRequest()
 
         do {
-            self.tasks = try context.fetch(fetchRequest)
+            tasks = try context.fetch(fetchRequest)
         }
         catch let error as NSError {print(error.localizedDescription)}
         
-
-    }
+        return tasks
+    } 
     
     func deleteTask (taskIndex: Int) {
         let context = getContext()
